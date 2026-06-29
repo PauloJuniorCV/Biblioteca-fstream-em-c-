@@ -8,28 +8,29 @@ void adicionar (){
     fstream arquivo;
     string linha;
     
-    arquivo.open("produtos.txt", fstream::in | fstream::out | fstream::app);//abrir o documento .txt para escrever, ler e 
+    arquivo.open("produtos.txt", fstream::in | fstream::out | fstream::app);/*abrir o documento .txt para escrever, ler e para que as novas informações 
+    sejam acrescentadas ao final, sem apagar o que já existe*/
 
     cout<<"Digite o nome do produto\n";//add nome
     string nome;
-    cin.ignore();// para o /n nao interromper na escrita da string
-    getline(cin, nome); //fazendo assim a string aceita espaços quando o usuario digita
+    cin.ignore();// para o /n não interromper na escrita da string
+    getline(cin, nome); //fazendo assim a string aceita espaços quando o usuário digita
         
     while(getline(arquivo,linha)){//loop que a string(linha) recebe todo o valor da linha, comaça na primeira, depois da segunda linha, terceira...
-        if(linha=="Produto: "+ nome){ // se um produto tiver o mesmo nome do que o usuario quero colocar, vai cair nesse if
+        if(linha=="Produto: "+ nome){ // se um produto tiver o mesmo nome do que o usuário quer colocar, vai cair nesse if
             cout<<"Ja tem um produto com esse nome\n";
             return; //encerra a funçao
         }
     }
         
     arquivo.clear(); //libera o arquivo para leituras novamente
-    arquivo.seekg(0);//coloca ponteiro no inicio para a segunda verificaçao
+    arquivo.seekg(0);//coloca ponteiro no início para a segunda verificação
 
-    cout<<"Digite o codigo do produto\n";//add codigo
+    cout<<"Digite o codigo do produto\n";//add código
     long long codigo;
     cin>>codigo;
 
-    while(getline(arquivo,linha)){ //a mesma verificaçao foi feita para o codigo 
+    while(getline(arquivo,linha)){ //a mesma verificação foi feita para o código 
         if(linha=="Codigo: "+ to_string(codigo)){ //to_string(codigo) transforma o numero em string
             cout<<"Ja tem um produto com esse codigo\n";
             return;
@@ -39,10 +40,12 @@ void adicionar (){
     arquivo.clear(); //libera o arquivo para leituras novamente
 
     arquivo<<"Produto: "<<nome<<endl; //adicioa o nome no artigo com uma identificação para saber que é o nome do produto
-    //foi colocado aqui para nao ser escrito no artigo antes da verificaçao do codigo
+    
+    //o nome foi colocado no arquivo só aqui para não ser escrito no artigo antes da verificaçao do código
+    
     arquivo<<"Codigo: "<<codigo<<endl;
 
-    //o resto das informações nao precisa da verificaçao,pois, por exemplo, é possivel ter dois produtos com a mesma validade
+    //o resto das informações não precisa da verificação, pois, por exemplo, é possível ter dois produtos com a mesma validade
 
     cout<<"Digite a validade do lote\n"; //add data de validade
     string data;
@@ -67,7 +70,7 @@ void pesquisar(){
         cout<<"[1]=Pesquisar por nome"<<endl<<"[2]=Pesquisar pelo numero do codigo"<<endl;
         cin>>opcaoDePesquisa;
 
-    }while(opcaoDePesquisa != 1 && opcaoDePesquisa != 2); //se for colocado um numero errado aparece novamente a opcao de escolha
+    }while(opcaoDePesquisa != 1 && opcaoDePesquisa != 2); //se for colocado um número errado aparece novamente a opcao de escolha
 
     string nomeBuscar, codigoBuscar, linha;
     string linhaAnterior, codigo, validade, quantidade, produtoV;
