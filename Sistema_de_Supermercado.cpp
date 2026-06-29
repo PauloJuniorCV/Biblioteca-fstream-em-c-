@@ -19,6 +19,7 @@ void adicionar (){
     while(getline(arquivo,linha)){//loop que a string(linha) recebe todo o valor da linha, comaça na primeira, depois da segunda linha, terceira...
         if(linha=="Produto: "+ nome){ // se um produto tiver o mesmo nome do que o usuário quer colocar, vai cair nesse if
             cout<<"Ja tem um produto com esse nome\n";
+            arquivo.close();
             return; //encerra a funçao
         }
     }
@@ -33,6 +34,7 @@ void adicionar (){
     while(getline(arquivo,linha)){ //a mesma verificação foi feita para o código 
         if(linha=="Codigo: "+ to_string(codigo)){ //to_string(codigo) transforma o numero em string
             cout<<"Ja tem um produto com esse codigo\n";
+            arquivo.close();
             return;
         }
     }
@@ -370,7 +372,6 @@ void alerta(){
             if(lotes=="Quantidade de lotes: 1" || lotes=="Quantidade de lotes: 2" || 
                 lotes=="Quantidade de lotes: 3"){ //analiza para saber se o produto tem menos de 4 lotes
                             
-                cout<<"Produtos com menos de 4 no estoque:\n";
                 cout<<endl<<produto<<endl<<lotes<<endl; //exibe o nome do produto e a quantidade de lotes caso tenha mesmo de 4
                 executado=true;
             }
@@ -396,25 +397,34 @@ void alerta(){
 int main(){
 
     int opcao;
-    do{
+    bool sair=false;
+      
+    while(!sair){
+        do{
 
-        cout<<"Digite qual opcao deseja acessar\n";
-        cout<<"[1]= Cadastro, [2]= Pesquisa, [3]= Alerta de pouco estoque\n";
-        cin>>opcao;
+            cout<<"\nQual opcao deseja acessar\n";
+            cout<<"[1]= Cadastro, [2]= Pesquisa, [3]= Alerta de pouco estoque, [4]= Sair\n";
+            cin>>opcao;
 
-    }while(opcao != 1 && opcao !=2 && opcao !=3);
+        }while(opcao != 1 && opcao !=2 && opcao !=3 && opcao !=4);
 
-    switch(opcao){
-        case 1:{
-            adicionar();
-            break;
-        }
-        case 2:{
-            pesquisar();
-            break;
-        }
-        case 3:{
-            alerta();
+        switch(opcao){
+            case 1:{
+                adicionar();
+                break;
+            }
+            case 2:{
+                pesquisar();
+                break;
+            }
+            case 3:{
+                alerta();
+                break;
+            }
+            case 4:{
+                sair=true;
+                break;
+            }
         }
     }
     return 0;
