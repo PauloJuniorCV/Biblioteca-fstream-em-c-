@@ -45,9 +45,10 @@ void adicionar (){
     //o resto das informações nao precisa da verificaçao,pois, por exemplo, é possivel ter dois produtos com a mesma validade
 
     cout<<"Digite a validade do lote\n"; //add data de validade
-    int dia, mes, ano;
-    cin>>dia>>mes>>ano;
-    arquivo<<"Validade: "<<dia<<"/"<<mes<<"/"<<ano<<endl;
+    string data;
+    cin.ignore();
+    getline(cin, data);
+    arquivo<<"Validade: "<<data<<endl;
 
     cout<<"Digite a quantidade de lotes\n";//add quantidade de lote
     int quantidade;
@@ -218,9 +219,10 @@ void pesquisar(){
 
             case 'v':
             case 'V':{
-                cout<<"Qual a nova validade? Digite o dia, mes e ano\n";//editar a validade
-                int dia, mes, ano;
-                cin>>dia>>mes>>ano;
+                cout<<"Qual a nova validade? \n";//editar a validade
+                string data;
+                cin.ignore();
+                getline(cin, data);
 
                 while(getline(arquivo,linha)){
                     
@@ -242,7 +244,7 @@ void pesquisar(){
 
                     if(apagado==true && contador==0){
                         copia<<codigo<<endl; //coloca novamente o codigo ja que ele parou de copiar nessa linha
-                        copia<<"Validade: "<<dia<<"/"<<mes<<"/"<<ano<<endl; //coloca a informaçao nova que foi editada
+                        copia<<"Validade: "<<data<<endl; //coloca a informaçao nova que foi editada
 
                     }
                     if(apagado==true){
